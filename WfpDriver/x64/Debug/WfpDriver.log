@@ -1,0 +1,8 @@
+﻿  Building 'WfpDriver' with toolset 'WindowsKernelModeDriver10.0' and the 'Universal' target platform.
+  callout.cpp
+  WfpDriver.vcxproj -> C:\Users\test\Desktop\claude_tcp_connect_hook\x64\Debug\WfpDriver.sys
+  Done Adding Additional Store
+  Successfully signed: C:\Users\test\Desktop\claude_tcp_connect_hook\x64\Debug\WfpDriver.sys
+  
+  [TestSign] Driver signed: C:\Users\test\Desktop\claude_tcp_connect_hook\x64\Debug\WfpDriver.sys
+  Driver is 'Universal'.
