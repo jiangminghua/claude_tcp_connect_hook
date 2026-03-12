@@ -27,7 +27,7 @@ typedef struct _ORIGINAL_DEST_INFO {
 #pragma pack(pop)
 
 #define LOCAL_PROXY_PORT    10800
-#define REMOTE_SERVER_IP    "43.134.77.35"
+#define REMOTE_SERVER_IP    "8.8.8.8"
 #define REMOTE_SERVER_PORT  19000
 #define BUFFER_SIZE         65536
 #define DRIVER_SERVICE_NAME L"WfpDriver"

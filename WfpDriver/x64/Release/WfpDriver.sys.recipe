@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\Users\test\Desktop\claude_tcp_connect_hook\WfpDriver\x64\Release\WfpDriver.sys</FullPath>
+      <FullPath>C:\Users\test\Desktop\claude_tcp_connect_hook\x64\Release\WfpDriver.sys</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

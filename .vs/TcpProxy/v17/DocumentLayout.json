@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\test\\Desktop\\claude_tcp_connect_hook\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A1B2C3D4-1111-2222-3333-444455558888}|ProxyServer\\ProxyServer.vcxproj|C:\\Users\\test\\Desktop\\claude_tcp_connect_hook\\ProxyServer\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A1B2C3D4-1111-2222-3333-444455558888}|ProxyServer\\ProxyServer.vcxproj|solutionrelative:ProxyServer\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A1B2C3D4-1111-2222-3333-444455557777}|ProxyClient\\ProxyClient.vcxproj|C:\\Users\\test\\Desktop\\claude_tcp_connect_hook\\ProxyClient\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{A1B2C3D4-1111-2222-3333-444455557777}|ProxyClient\\ProxyClient.vcxproj|solutionrelative:ProxyClient\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A1B2C3D4-1111-2222-3333-444455558888}|ProxyServer\\ProxyServer.vcxproj|C:\\Users\\test\\Desktop\\claude_tcp_connect_hook\\ProxyServer\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A1B2C3D4-1111-2222-3333-444455558888}|ProxyServer\\ProxyServer.vcxproj|solutionrelative:ProxyServer\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A1B2C3D4-1111-2222-3333-444455556666}|WfpDriver\\WfpDriver.vcxproj|C:\\Users\\test\\Desktop\\claude_tcp_connect_hook\\WfpDriver\\logging.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -50,7 +50,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Document",
@@ -62,8 +62,7 @@
               "RelativeToolTip": "WfpDriver\\logging.cpp",
               "ViewState": "AgIAAJkAAAAAAAAAAAAAAK0AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-03-09T10:06:10.51Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-09T10:06:10.51Z"
             },
             {
               "$type": "Document",
@@ -75,8 +74,7 @@
               "RelativeToolTip": "WfpDriver\\device.cpp",
               "ViewState": "AgIAABIAAAAAAAAAAAAQwCoAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-03-09T08:18:06.208Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-09T08:18:06.208Z"
             },
             {
               "$type": "Document",
@@ -100,8 +98,7 @@
               "RelativeToolTip": "WfpDriver\\callout.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2026-03-09T08:13:45.283Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-09T08:13:45.283Z"
             },
             {
               "$type": "Document",
@@ -113,8 +110,7 @@
               "RelativeToolTip": "WfpDriver\\callout.cpp",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAADcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-03-09T08:12:18.904Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-09T08:12:18.904Z"
             },
             {
               "$type": "Document",
@@ -154,26 +150,26 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "main.cpp",
               "DocumentMoniker": "C:\\Users\\test\\Desktop\\claude_tcp_connect_hook\\ProxyServer\\main.cpp",
               "RelativeDocumentMoniker": "ProxyServer\\main.cpp",
               "ToolTip": "C:\\Users\\test\\Desktop\\claude_tcp_connect_hook\\ProxyServer\\main.cpp",
               "RelativeToolTip": "ProxyServer\\main.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAvwBAAAAAYAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAvwBEAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-03-09T07:35:05.526Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "main.cpp",
               "DocumentMoniker": "C:\\Users\\test\\Desktop\\claude_tcp_connect_hook\\ProxyClient\\main.cpp",
               "RelativeDocumentMoniker": "ProxyClient\\main.cpp",
               "ToolTip": "C:\\Users\\test\\Desktop\\claude_tcp_connect_hook\\ProxyClient\\main.cpp",
               "RelativeToolTip": "ProxyClient\\main.cpp",
-              "ViewState": "AgIAAKEAAAAAAAAAAAAQwK4AAAAKAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAB0AAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-03-09T07:32:45.944Z",
               "EditorCaption": ""
