@@ -15,6 +15,9 @@ KSPIN_LOCK g_ConnectionTableLock;
 UINT64 g_ProxyPid = 0;
 UINT32 g_CalloutId = 0;
 UINT64 g_FilterId = 0;
+UINT64 g_UdpBlockDnsFilterId = 0;  // Unused, kept for binary compat
+UINT64 g_UdpBlockQuicFilterId = 0;
+UINT64 g_Ipv6BlockFilterId = 0;
 HANDLE g_EngineHandle = nullptr;
 HANDLE g_RedirectHandle = nullptr;
 
@@ -377,6 +380,62 @@ NTSTATUS RegisterWfpCallout(_In_ PDEVICE_OBJECT deviceObject)
             goto abort_transaction;
         }
         LogPrint("[WfpDriver] RegisterWfpCallout: Filter added, filterId=%llu", g_FilterId);
+
+        // ---- Block UDP 443 (QUIC/HTTP3) to force TCP fallback ----
+        LogPrint("[WfpDriver] RegisterWfpCallout: Adding UDP QUIC block filter");
+        {
+            FWPM_FILTER_CONDITION0 udpQuicConditions[2] = {};
+
+            // Condition 1: UDP protocol
+            udpQuicConditions[0].fieldKey = FWPM_CONDITION_IP_PROTOCOL;
+            udpQuicConditions[0].matchType = FWP_MATCH_EQUAL;
+            udpQuicConditions[0].conditionValue.type = FWP_UINT8;
+            udpQuicConditions[0].conditionValue.uint8 = IPPROTO_UDP;
+
+            // Condition 2: Remote port 443
+            udpQuicConditions[1].fieldKey = FWPM_CONDITION_IP_REMOTE_PORT;
+            udpQuicConditions[1].matchType = FWP_MATCH_EQUAL;
+            udpQuicConditions[1].conditionValue.type = FWP_UINT16;
+            udpQuicConditions[1].conditionValue.uint16 = 443;
+
+            FWPM_FILTER0 udpQuicFilter = {};
+            udpQuicFilter.displayData.name = const_cast<wchar_t*>(L"WfpTcpProxy Block UDP QUIC");
+            udpQuicFilter.layerKey = FWPM_LAYER_ALE_AUTH_CONNECT_V4;
+            udpQuicFilter.subLayerKey = WFP_SUBLAYER_GUID;
+            udpQuicFilter.action.type = FWP_ACTION_BLOCK;
+            udpQuicFilter.filterCondition = udpQuicConditions;
+            udpQuicFilter.numFilterConditions = 2;
+            udpQuicFilter.weight.type = FWP_UINT8;
+            udpQuicFilter.weight.uint8 = 0xF;
+
+            status = FwpmFilterAdd0(g_EngineHandle, &udpQuicFilter, nullptr, &g_UdpBlockQuicFilterId);
+            if (!NT_SUCCESS(status)) {
+                LogPrint("[WfpDriver] RegisterWfpCallout: UDP QUIC block filter failed: 0x%08X", status);
+                goto abort_transaction;
+            }
+            LogPrint("[WfpDriver] RegisterWfpCallout: UDP QUIC block filter added, filterId=%llu", g_UdpBlockQuicFilterId);
+        }
+
+        // ---- Block all IPv6 outbound connections to prevent IPv6 leaks ----
+        LogPrint("[WfpDriver] RegisterWfpCallout: Adding IPv6 block filter");
+        {
+            FWPM_FILTER0 ipv6Filter = {};
+            ipv6Filter.displayData.name = const_cast<wchar_t*>(L"WfpTcpProxy Block IPv6");
+            ipv6Filter.layerKey = FWPM_LAYER_ALE_AUTH_CONNECT_V6;
+            ipv6Filter.subLayerKey = WFP_SUBLAYER_GUID;
+            ipv6Filter.action.type = FWP_ACTION_BLOCK;
+            ipv6Filter.filterCondition = nullptr;  // No conditions = match all IPv6
+            ipv6Filter.numFilterConditions = 0;
+            ipv6Filter.weight.type = FWP_UINT8;
+            ipv6Filter.weight.uint8 = 0xF;
+
+            status = FwpmFilterAdd0(g_EngineHandle, &ipv6Filter, nullptr, &g_Ipv6BlockFilterId);
+            if (!NT_SUCCESS(status)) {
+                LogPrint("[WfpDriver] RegisterWfpCallout: IPv6 block filter failed: 0x%08X", status);
+                goto abort_transaction;
+            }
+            LogPrint("[WfpDriver] RegisterWfpCallout: IPv6 block filter added, filterId=%llu", g_Ipv6BlockFilterId);
+        }
     }
 
     // Commit transaction
@@ -406,6 +465,16 @@ void UnregisterWfpCallout()
     LogPrint("[WfpDriver] UnregisterWfpCallout: Starting unregistration");
 
     if (g_EngineHandle) {
+        if (g_Ipv6BlockFilterId) {
+            LogPrint("[WfpDriver] UnregisterWfpCallout: Deleting IPv6 block filter %llu", g_Ipv6BlockFilterId);
+            FwpmFilterDeleteById0(g_EngineHandle, g_Ipv6BlockFilterId);
+            g_Ipv6BlockFilterId = 0;
+        }
+        if (g_UdpBlockQuicFilterId) {
+            LogPrint("[WfpDriver] UnregisterWfpCallout: Deleting UDP QUIC block filter %llu", g_UdpBlockQuicFilterId);
+            FwpmFilterDeleteById0(g_EngineHandle, g_UdpBlockQuicFilterId);
+            g_UdpBlockQuicFilterId = 0;
+        }
         if (g_FilterId) {
             LogPrint("[WfpDriver] UnregisterWfpCallout: Deleting filter %llu", g_FilterId);
             FwpmFilterDeleteById0(g_EngineHandle, g_FilterId);

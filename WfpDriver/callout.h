@@ -56,6 +56,9 @@ extern KSPIN_LOCK g_ConnectionTableLock;
 extern UINT64 g_ProxyPid;
 extern UINT32 g_CalloutId;
 extern UINT64 g_FilterId;
+extern UINT64 g_UdpBlockDnsFilterId;
+extern UINT64 g_UdpBlockQuicFilterId;
+extern UINT64 g_Ipv6BlockFilterId;
 extern HANDLE g_EngineHandle;
 extern HANDLE g_RedirectHandle;
 
